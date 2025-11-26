@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-CalcHub is a full-stack Australian financial calculator platform built with .NET Core (backend) and React (frontend), featuring clean architecture and modern design.
+CalcHub is a full-stack Australian financial calculator platform built with .NET 8 (backend) and React (frontend), featuring clean architecture and modern design.
 
 ## Technology Stack
 
