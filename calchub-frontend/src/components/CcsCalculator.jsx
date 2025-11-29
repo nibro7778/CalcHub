@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calculator, DollarSign, Users, Clock, AlertCircle, CheckCircle, Info, HelpCircle } from 'lucide-react';
+import { Calculator, DollarSign, Users, Clock, AlertCircle, CheckCircle, Info, HelpCircle, Github, Linkedin } from 'lucide-react';
 
 const ChildCareSubsidyCalculator = () => {
   const [formData, setFormData] = useState({
@@ -508,10 +508,35 @@ const ChildCareSubsidyCalculator = () => {
 
           {/* Footer Info */}
           <div className="bg-gray-50 px-8 py-4 border-t">
-            <p className="text-xs text-gray-600 text-center">
-              This calculator uses 2024-25 financial year rates. Results are estimates only. 
-              Visit Services Australia for official information.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+              <p className="text-xs text-gray-600 text-center sm:text-left">
+                This calculator uses 2024-25 financial year rates. Results are estimates only. 
+                Visit Services Australia for official information.
+              </p>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-gray-500">Built by Niraj Trivedi</span>
+                <div className="flex gap-2">
+                  <a
+                    href="https://github.com/nibro7778"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-full transition-colors"
+                    aria-label="GitHub Profile"
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/niraj-trivedi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                    aria-label="LinkedIn Profile"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
