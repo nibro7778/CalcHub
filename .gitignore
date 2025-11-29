@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Azure Developer CLI
+.azure/
+!.azure/*.copilotmd
+*.env
+!*.env.example

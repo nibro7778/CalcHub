@@ -32,7 +32,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173") // React dev servers
+        // Get CORS origins from environment variable (for production) or use default dev servers
+        var corsOrigins = builder.Configuration["CORS_ORIGINS"]?.Split(',', StringSplitOptions.RemoveEmptyEntries) 
+            ?? new[] { "http://localhost:3000", "http://localhost:5173" };
+        
+        policy.WithOrigins(corsOrigins)
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -46,15 +50,12 @@ builder.Logging.AddDebug();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financial Tools API V1");
-        c.RoutePrefix = string.Empty; // Swagger UI at root
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Financial Tools API V1");
+    c.RoutePrefix = string.Empty; // Swagger UI at root
+});
 
 app.UseHttpsRedirection();
 

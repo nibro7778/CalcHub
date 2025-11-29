@@ -92,7 +92,11 @@ const ChildCareSubsidyCalculator = () => {
     setResult(null);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5144';
+      // Use runtime config (set in config.js based on hostname)
+      const apiUrl = window.ENV?.VITE_API_URL || import.meta.env.VITE_API_URL || 'http://localhost:5144';
+      
+      console.log('API URL:', apiUrl); // Debug log
+      
       const response = await fetch(`${apiUrl}/api/calculators/child-care-subsidy`, {
         method: 'POST',
         headers: {

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: calchub
+metadata:
+  template: calchub-azure-deployment
+
+services:
+  api:
+    project: ./src/CalcHub.Api
+    language: csharp
+    host: appservice
+    
+  frontend:
+    project: ./calchub-frontend
+    language: js
+    host: appservice
+    dist: dist
