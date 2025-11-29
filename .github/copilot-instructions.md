@@ -33,8 +33,15 @@ CalcHub/
 │   └── CalcHub.Domain/       # Domain models
 │       └── CCS/              # Child Care Subsidy domain
 ├── calchub-frontend/         # React frontend
-│   └── src/
-│       └── components/       # React components
+│   ├── src/
+│   │   └── components/       # React components
+│   └── public/
+│       └── config.js         # Runtime API URL configuration
+├── infra/                    # Azure infrastructure (Bicep)
+│   ├── main.bicep            # Main infrastructure orchestration
+│   ├── app/                  # App Service definitions
+│   └── core/                 # Shared resources (monitoring)
+├── azure.yaml                # Azure Developer CLI configuration
 └── CalcHub.sln               # Solution file
 ```
 
@@ -56,6 +63,8 @@ CalcHub/
 - Use **Tailwind CSS** utility classes for styling
 - Keep components in the `components/` directory
 - Use **lucide-react** for icons
+- **API URL Configuration**: Use `window.ENV.VITE_API_URL` for runtime API URL (auto-detected in production)
+- Never hardcode API URLs - always use the runtime configuration from `config.js`
 
 ### Code Style
 
@@ -126,3 +135,42 @@ When adding a new calculator:
 - All monetary values are in **Australian Dollars (AUD)**
 - Use the `Money` class for all financial values
 - Round monetary calculations to 2 decimal places
+
+## Azure Deployment
+
+### Deployment Method
+- Use **Azure Developer CLI (azd)** for deployment
+- Infrastructure is defined in **Bicep** templates in `/infra`
+- Configuration in `azure.yaml` defines two services: `api` and `frontend`
+
+### Infrastructure Components
+- **Azure App Services** (Linux) - Hosts both frontend and backend
+- **Application Insights** - Application monitoring and telemetry
+- **Log Analytics Workspace** - Centralized logging
+- **Managed Identity** - Secure service authentication
+
+### Key Deployment Files
+- `azure.yaml` - Defines services and hosting configuration
+- `infra/main.bicep` - Main infrastructure orchestration
+- `infra/app/api.bicep` - Backend API App Service configuration
+- `infra/app/frontend.bicep` - Frontend App Service configuration
+- `calchub-frontend/public/config.js` - Runtime API URL auto-detection
+
+### Environment Configuration
+- **Backend CORS**: Configured via `CORS_ORIGINS` environment variable
+- **Frontend API URL**: Auto-detected at runtime based on hostname pattern (azweb → azapi)
+- **Production Swagger**: Enabled for API testing in production
+
+### Deployment Commands
+```bash
+azd up              # Provision infrastructure and deploy
+azd deploy          # Deploy both services
+azd deploy api      # Deploy only backend
+azd deploy frontend # Deploy only frontend
+```
+
+### Important Notes
+- Frontend uses runtime configuration (`config.js`) to detect API URL
+- CORS is handled at application level (.NET), not at Azure App Service level
+- Both services share a single App Service Plan (B1 Basic)
+- All resources use unique naming with `uniqueString()` function
