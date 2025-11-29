@@ -526,7 +526,7 @@ const ChildCareSubsidyCalculator = () => {
                     <Github className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/niraj-trivedi"
+                    href="https://www.linkedin.com/in/nirajtrivedi"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
