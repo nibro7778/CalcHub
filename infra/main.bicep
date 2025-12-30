@@ -53,16 +53,16 @@ module applicationInsights './core/monitoring/app-insights.bicep' = {
   }
 }
 
-// App Service Plan
+// App Service Plan - Free tier
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-01-01' = {
   name: appServicePlanName
   location: location
   tags: tags
   sku: {
-    name: 'B1'
-    tier: 'Basic'
-    size: 'B1'
-    family: 'B'
+    name: 'F1'
+    tier: 'Free'
+    size: 'F1'
+    family: 'F'
     capacity: 1
   }
   kind: 'linux'

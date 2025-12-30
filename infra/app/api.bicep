@@ -22,7 +22,7 @@ resource apiAppService 'Microsoft.Web/sites@2023-01-01' = {
     httpsOnly: true
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|8.0'
-      alwaysOn: true
+      alwaysOn: false
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
       http20Enabled: true

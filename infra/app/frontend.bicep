@@ -22,7 +22,7 @@ resource frontendAppService 'Microsoft.Web/sites@2023-01-01' = {
     httpsOnly: true
     siteConfig: {
       linuxFxVersion: 'NODE|18-lts'
-      alwaysOn: true
+      alwaysOn: false
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
       http20Enabled: true
